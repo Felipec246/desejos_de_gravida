@@ -5,9 +5,9 @@ for navio in navios:
     tamanho = navios[navio][0]
     quantidade = navios[navio][1]
     for i in range(quantidade):
+        print(f'Insira as informações referentes ao navio {navio} que possui tamanho {tamanho}')
         valido = False
         while not valido:
-            print(f'Insira as informações referentes ao navio {navio} que possui tamanho {tamanho}')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
             if navio == 'submarino':
