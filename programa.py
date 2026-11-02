@@ -8,12 +8,12 @@ for navio in navios:
         print(f'Insira as informações referentes ao navio {navio} que possui tamanho {tamanho}')
         valido = False
         while not valido:
-            linha = int(input('Linha: '))
-            coluna = int(input('Coluna: '))
+            linha = int(input())
+            coluna = int(input())
             if navio == 'submarino':
                 orientacao = 'horizontal'
             else:
-                escolha = int(input('[1] Vertical [2] Horizontal > '))
+                escolha = int(input())
                 if escolha == 1:
                     orientacao = 'vertical'
                 else:
