@@ -39,4 +39,18 @@ def posiciona_frota(frota):
                 linha = posicao[0]
                 coluna = posicao[1]
                 tabuleiro[linha][coluna] = 1
-    return tabuleiro                                                     
+    return tabuleiro
+
+def afundados(frota,tabuleiro):
+    total = 0
+    for tipo,navios in frota.items():
+        for navio in navios:
+            atingidos = 0
+            for posicao in navio:
+                linha = posicao[0]
+                coluna = posicao[1]
+                if tabuleiro[linha][coluna] == 'X':
+                    atingidos += 1
+            if atingidos == len(navio):
+                total += 1
+    return total
