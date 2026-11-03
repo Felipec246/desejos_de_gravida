@@ -46,22 +46,14 @@ for navio in navios:
 
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
-    texto += '   0 1 2 3 4 5 6 7 8 9       0 1 2 3 4 5 6 7 8 9\n'
-    texto += '   -------------------       -------------------\n'
+    texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
+    texto += '_______________________________      _______________________________\n'
 
     for linha in range(len(tabuleiro_jogador)):
-        jogador_info = ' '.join(
-            str(item) for item in tabuleiro_jogador[linha]
-        )
-        oponente_info = ' '.join(
-            str(info) if str(info) == 'X' else '0'
-            for info in tabuleiro_oponente[linha]
-        )
-        texto += f'{linha}|{jogador_info}  {linha}|{oponente_info}\n'
-
+        jogador_info = '  '.join([str(item) for item in tabuleiro_jogador[linha]])
+        oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
+        texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
     return texto
-
-
 frota_oponente = {
     'porta-aviões': [
         [[9, 1], [9, 2], [9, 3], [9, 4]]
@@ -92,21 +84,25 @@ posicoes_atacadas = []
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
 
-    linha = int(input('Linha: '))
+    posicao_inedita = False
 
-    while linha < 0 or linha > 9:
-        print('Linha inválida!')
-        linha = int(input('Linha: '))
+    while not posicao_inedita:
+        linha = int(input('Jogador, qual linha deseja atacar? '))
 
-    coluna = int(input('Coluna: '))
+        while linha < 0 or linha > 9:
+            print('Linha inválida!')
+            linha = int(input('Jogador, qual linha deseja atacar? '))
 
-    while coluna < 0 or coluna > 9:
-        print('Coluna inválida!')
-        coluna = int(input('Coluna: '))
+        coluna = int(input('Jogador, qual coluna deseja atacar? '))
 
-    if [linha, coluna] in posicoes_atacadas:
-        print(f'A posição linha {linha} e coluna {coluna} já foi informada anteriormente!')
-        continue
+        while coluna < 0 or coluna > 9:
+            print('Coluna inválida!')
+            coluna = int(input('Jogador, qual coluna deseja atacar? '))
+
+        if [linha, coluna] in posicoes_atacadas:
+            print(f'A posição linha {linha} e coluna {coluna} já foi informada anteriormente!')
+        else:
+            posicao_inedita = True
 
     posicoes_atacadas.append([linha, coluna])
 
